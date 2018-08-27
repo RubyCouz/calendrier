@@ -1,3 +1,18 @@
+<?php 
+session_start();
+
+
+if (!empty($_POST['month'])) {
+    setcookie('month', $month, time() + 365 * 24 * 3600, '/', 'partie9', false, false); //écriture cookie pseudo
+$month = $_POST['month'];
+}
+if (!empty($_POST['year'])) {
+    setcookie('year', $year, time() + 365 * 24 * 3600, '/', 'partie9', false, false); //écriture cookie mot de passe
+$yearNumber = $_POST['year'];
+}
+
+    
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
     <head>
@@ -19,14 +34,14 @@
                     <!-- fenetre modal demandant le mois et l'année -->
                     <div class="modal-body">
                         <div class="form-group">
-                            <form class="form" action="calendar.php" method="POST">
+                            <form class="form" action="calendar.php" method="GET">
                                 <label>Mois</label>
                                 <select class="form-control" name="month"> <!-- definition de la variable $mo,th pour l'affichage du mois dans la liste déroulante -->
                                     <?php
-                                    $month = array(1 =>'Janvier', 2 =>'Février', 3 =>'Mars', 4 =>'Avril', 5 => 'Mai', 6 => 'Juin', 7 =>'Juillet', 8 =>'Août', 9 =>'Septembre', 10 =>'Octobre', 11 =>'Novembre', 12 =>'Décembre');
-                                    foreach ($month as $index => $monthName) {
+                                    $months = array(1 =>'Janvier', 2 =>'Février', 3 =>'Mars', 4 =>'Avril', 5 => 'Mai', 6 => 'Juin', 7 =>'Juillet', 8 =>'Août', 9 =>'Septembre', 10 =>'Octobre', 11 =>'Novembre', 12 =>'Décembre');
+                                    foreach ($months as $index => $monthName) {
                                         ?>
-                                    <option value="<?= $monthName ?>"><?= $monthName ?></option>
+                                    <option value="<?= $index ?>"><?= $monthName ?></option>
                                         <?php
                                     }
                                     ?>
@@ -43,7 +58,7 @@
                                         
                                 </select>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Valider</button>
+                                    <input type="submit" class="btn btn-primary"></input>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                 </div>
                             </form>
